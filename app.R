@@ -410,20 +410,16 @@ recommander_pays <- function(continent_filter = NULL, country_filter, age, sexe,
 # --------------------------------------------------------------
 # Gemini API: Chat history + call function
 # --------------------------------------------------------------
-chatHistory <- list()   # store conversation globally
-GEMINI_API_KEY <- 'AIzaSyDrI53CFnUqeNZNZmWY1V_a5s92Gt4e3b8'
+chatHistory <- list()  # store conversation globally
+
+# Clé API définie en dur
+GEMINI_API_KEY <- "AIzaSyDrI53CFnUqeNZNZmWY1V_a5s92Gt4e3b8"
 
 gemini <- function(prompt, 
                    temperature = 1,
                    max_output_tokens = 1024,
-                   api_key = Sys.getenv("GEMINI_API_KEY"),
+                   api_key = GEMINI_API_KEY,
                    model = "gemini-2.0-flash") {
-  
-  # Ask for key if not set
-  if (nchar(api_key) < 1) {
-    api_key <- readline("Paste your API key here: ")
-    Sys.setenv(GEMINI_API_KEY = api_key)
-  }
   
   # ➕ Add user prompt to history
   chatHistory <<- append(chatHistory, list(list(
@@ -466,7 +462,6 @@ gemini <- function(prompt,
   
   return(answer)
 }
-
 # --------------------------------------------------------------
 # Population Pyramid 
 # --------------------------------------------------------------
